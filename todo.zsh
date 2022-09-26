@@ -7,8 +7,8 @@ if [[ ! -d $FILE_DIR ]]; then echo "directory '$FILE_DIR' not found"; exit 1; fi
 touch $FILE_TODO $FILE_DONE
 GE=$reset_color
 G=($fg[red]"   "$GE $fg[green]"   "$GE $fg[yellow]""$GE $fg[blue]""$GE)
-TODOS=`comm -23 $FILE_TODO $FILE_DONE | grep -v -E "(^#|^\s*$)"`
-DONES=`comm -12 $FILE_TODO $FILE_DONE | grep -v -E "(^#|^\s*$)"`
+TODOS=`comm -23 $FILE_TODO $FILE_DONE`
+DONES=`comm -12 $FILE_TODO $FILE_DONE`
 
 if [[ $# -ne 0 ]]; then
   COMMAND=$1
@@ -19,7 +19,7 @@ if [[ $# -ne 0 ]]; then
       cat $FILE_TODO | grep -v -E "(^#|^\s*$)" | sort -u -o $FILE_TODO - ;;
     clean|c)
       echo $TODOS > $FILE_TODO
-      echo "# this file contains completed todos" > $FILE_DONE ;;
+      echo -n "" > $FILE_DONE ;;
     done|d)
       echo $TODOS | awk 'NR=='$1' {print;exit}' >> $FILE_DONE; 
       cat $FILE_DONE | grep -v -E "(^#|^\s*$)" | sort -u -o $FILE_DONE - ;;
