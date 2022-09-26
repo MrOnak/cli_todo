@@ -30,9 +30,9 @@ if [[ $# -ne 0 ]]; then
       echo "Usage: $SELF (add|done|undo|clean|)"
       echo "  $SELF                  prints current open and completed todos"
       echo "  $SELF add some task    adds 'some task' as open todo"
+      echo "  $SELF clean            clears completed todos off the list" ;;
       echo "  $SELF done N           marks the Nth todo as completed"
       echo "  $SELF undo N           marks the Nth completed todo as not done"
-      echo "  $SELF clean            clears completed todos off the list" ;;
   esac
 else
   echo $fg_bold[default]"  my todos: "$reset_color
