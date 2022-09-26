@@ -3,6 +3,8 @@
 This is a todo list manager for zsh. It was born out of curiosity and
 wanting to learn coreutils.
 
+![screenshot](screenshot.jpg)
+
 ## usage
 
 * `todo` lists currently open and completed tasks
