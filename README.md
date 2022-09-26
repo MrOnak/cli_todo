@@ -12,6 +12,10 @@ wanting to learn coreutils.
 * `todo done N` marks the Nth task as completed
 * `todo clean` purges completed tasks off the lists
 
+You can mark a task as high priority by including `:prio:` somewhere
+in the task name. Similarily you can mark a task as low priority by
+adding `:low:` somewhere in the task name.
+
 ## requirements
 
 Currently this requires zsh due to how I handle colors in the script.
@@ -19,8 +23,7 @@ The zsh color syntax was chosen for convenience, you can replace it with
 color escape codes and get rid of the color autoloading.
 
 It also requires a nerdfont for checkmark glyphs. You can change the 
-glyphs back to ASCII by replacing `GLYPH_TODO` and `GLYPH_DONE`. 
-I recommend 'o' for an open todo and 'x' for a completed one.
+glyphs back to ASCII by replacing the `GLYPH_*` variables. 
 
 ## setup 
 
