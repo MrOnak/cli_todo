@@ -8,7 +8,7 @@ FILE_DONE=$FILE_DIR"/done.txt"
 if [[ ! -d $FILE_DIR ]]; then echo "directory '$FILE_DIR' not found"; exit 1; fi
 touch $FILE_TODO $FILE_DONE
 GLYPH_TODO=$fg[red]"   "$reset_color
-GLYPH_DONE=$fg[green]"       "$reset_color
+GLYPH_DONE=$fg[green]"   "$reset_color
 GLYPH_HIGH=$fg[yellow]""$reset_color
 GLYPH_LOW=$fg[blue]""$reset_color
 TODOS=`comm $FILE_TODO $FILE_DONE | cut --fields 1 | grep -v -E "(^#|^\s*$)"`
@@ -24,15 +24,19 @@ if [[ $# -ne 0 ]]; then
     done|d)
       echo $TODOS | awk 'NR=='$1' {print;exit}' >> $FILE_DONE; 
       cat $FILE_DONE | grep -v -E "(^#|^\s*$)" | sort -u -o $FILE_DONE - ;;
+    undo|u) 
+      sed -i $1'd' $FILE_DONE ;;
     clean|c)
       echo $TODOS > $FILE_TODO
       echo "# this file contains completed todos" > $FILE_DONE ;;
     *)
-      echo "Usage: $0 (add|done|clean|)"
-      echo "  $0                  prints current open and completed todos"
-      echo "  $0 add some task    adds 'some task' as open todo"
-      echo "  $0 done N           marks the Nth todo as completed"
-      echo "  $0 clean            clears completed todos off the list" ;;
+      SELF=`basename $0`
+      echo "Usage: $SELF (add|done|undo|clean|)"
+      echo "  $SELF                  prints current open and completed todos"
+      echo "  $SELF add some task    adds 'some task' as open todo"
+      echo "  $SELF done N           marks the Nth todo as completed"
+      echo "  $SELF undo N           marks the Nth completed todo as not done"
+      echo "  $SELF clean            clears completed todos off the list" ;;
   esac
 else
   echo $fg_bold[default]"  my todos: "$reset_color
@@ -41,7 +45,9 @@ else
       sed "s/^/$GLYPH_TODO/;s/:high:/$GLYPH_HIGH/;s/:low:/$GLYPH_LOW/"
   fi
   if [[ -n $DONES ]]; then
-    echo $DONES | sed "s/^/$GLYPH_DONE/;s/:high:/$GLYPH_HIGH/;s/:low:/$GLYPH_LOW/"
+    echo $fg[yellow]"  ────────────────────────────────────────────"$reset_color
+    echo $DONES | nl -s ") " -w2 | \
+      sed "s/^/$GLYPH_DONE/;s/:high:/$GLYPH_HIGH/;s/:low:/$GLYPH_LOW/"
   fi
 fi
 

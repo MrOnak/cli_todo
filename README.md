@@ -10,6 +10,7 @@ wanting to learn coreutils.
 * `todo` lists currently open and completed tasks
 * `todo add some task` adds 'some task' to the list of open tasks
 * `todo done N` marks the Nth task as completed
+* `todo undo N` marks the Nth completed task as not done
 * `todo clean` purges completed tasks off the lists
 
 You can mark a task as high priority by including `:high:` somewhere
