@@ -7,8 +7,8 @@ if [[ ! -d $FILE_DIR ]]; then echo "directory '$FILE_DIR' not found"; exit 1; fi
 touch $FILE_TODO $FILE_DONE
 GE=$reset_color
 G=($fg[red]"   "$GE $fg[green]"   "$GE $fg[yellow]""$GE $fg[blue]""$GE)
-TODOS=`comm $FILE_TODO $FILE_DONE | cut --fields 1 | grep -v -E "(^#|^\s*$)"`
-DONES=`comm $FILE_TODO $FILE_DONE | cut --fields 3 -s | grep -v -E "(^#|^\s*$)"`
+TODOS=`comm -23 $FILE_TODO $FILE_DONE | grep -v -E "(^#|^\s*$)"`
+DONES=`comm -12 $FILE_TODO $FILE_DONE | grep -v -E "(^#|^\s*$)"`
 
 if [[ $# -ne 0 ]]; then
   COMMAND=$1
