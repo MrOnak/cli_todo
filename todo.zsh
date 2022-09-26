@@ -9,7 +9,7 @@ if [[ ! -d $FILE_DIR ]]; then echo "directory '$FILE_DIR' not found"; exit 1; fi
 touch $FILE_TODO $FILE_DONE
 GLYPH_TODO=$fg[red]"   "$reset_color
 GLYPH_DONE=$fg[green]"       "$reset_color
-GLYPH_PRIO=$fg[yellow]""$reset_color
+GLYPH_HIGH=$fg[yellow]""$reset_color
 GLYPH_LOW=$fg[blue]""$reset_color
 TODOS=`comm $FILE_TODO $FILE_DONE | cut --fields 1 | grep -v -E "(^#|^\s*$)"`
 DONES=`comm $FILE_TODO $FILE_DONE | cut --fields 3 -s | grep -v -E "(^#|^\s*$)"`
@@ -38,10 +38,10 @@ else
   echo $fg_bold[default]"  my todos: "$reset_color
   if [[ -n $TODOS ]]; then 
     echo $TODOS | nl -s ") " -w2 | \
-      sed "s/^/$GLYPH_TODO/;s/:prio:/$GLYPH_PRIO/;s/:low:/$GLYPH_LOW/"
+      sed "s/^/$GLYPH_TODO/;s/:high:/$GLYPH_HIGH/;s/:low:/$GLYPH_LOW/"
   fi
   if [[ -n $DONES ]]; then
-    echo $DONES | sed "s/^/$GLYPH_DONE/;s/:prio:/$GLYPH_PRIO/;s/:low:/$GLYPH_LOW/"
+    echo $DONES | sed "s/^/$GLYPH_DONE/;s/:high:/$GLYPH_HIGH/;s/:low:/$GLYPH_LOW/"
   fi
 fi
 

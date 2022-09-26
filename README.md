@@ -12,7 +12,7 @@ wanting to learn coreutils.
 * `todo done N` marks the Nth task as completed
 * `todo clean` purges completed tasks off the lists
 
-You can mark a task as high priority by including `:prio:` somewhere
+You can mark a task as high priority by including `:high:` somewhere
 in the task name. Similarily you can mark a task as low priority by
 adding `:low:` somewhere in the task name.
 
