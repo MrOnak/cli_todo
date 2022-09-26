@@ -23,8 +23,8 @@ Currently this requires zsh due to how I handle colors in the script.
 The zsh color syntax was chosen for convenience, you can replace it with
 color escape codes and get rid of the color autoloading.
 
-It also requires a nerdfont for checkmark glyphs. You can change the 
-glyphs back to ASCII by replacing the `GLYPH_*` variables. 
+It also requires a nerdfont for glyphs. You can change the glyphs to 
+ASCII by replacing the `G` variable. 
 
 ## setup 
 
