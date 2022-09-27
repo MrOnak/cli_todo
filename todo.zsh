@@ -42,7 +42,7 @@ else
   fi
   if [[ -n $DONES ]]; then
     echo $fg[yellow]"  ────────────────────────────────────────────"$reset_color
-    echo $DONES | nl -s ") " -w2 | sed "s/^/$G[2]/;s/:high:/$G[3]/;s/:low:/$G[4]/"
+    echo $DONES | nl -s ") " -w2 | sed -E "s/^/$G[2]/;s/(:high:|:low:)\s*//"
   fi
 fi
 
