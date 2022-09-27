@@ -24,6 +24,11 @@ if [[ $# -ne 0 ]]; then
       echo $TODOS | awk 'NR=='$1' {print;exit}' >> $FILE_DONE
       grep -v -E "(^#|^\s*$)" $FILE_DONE | sort -u -o $FILE_DONE -
       sed -i $1'd' $FILE_TODO ;;
+    rename|r)
+      sed -i $1'd' $FILE_TODO
+      shift
+      echo $* >> $FILE_TODO
+      grep -v -E "(^#|^\s*$)" $FILE_TODO | sort -u -o $FILE_TODO - ;;
     trash|t)
       sed -i $1'd' $FILE_TODO ;;
     undo|u) 
@@ -32,13 +37,14 @@ if [[ $# -ne 0 ]]; then
       sed -i $1'd' $FILE_DONE ;;
     *)
       SELF=`basename $0`
-      echo "Usage: $SELF (add|clean|done|trash|undo|)"
-      echo "  $SELF                  prints current open and completed todos"
-      echo "  $SELF add some task    adds 'some task' as open todo"
-      echo "  $SELF clean            clears completed todos off the list" 
-      echo "  $SELF done N           marks the Nth todo as completed"
-      echo "  $SELF trash N          deletes the Nth open todo"
-      echo "  $SELF undo N           marks the Nth completed todo as not done" ;;
+      echo "Usage: $SELF (add|clean|done|rename|trash|undo|)"
+      echo "  $SELF                        prints current open and completed todos"
+      echo "  $SELF add some task          adds 'some task' as open todo"
+      echo "  $SELF clean                  clears completed todos off the list"
+      echo "  $SELF done N                 marks the Nth todo as completed"
+      echo "  $SELF rename N new descr.    renames Nth open task to 'new descr.'"
+      echo "  $SELF trash N                deletes the Nth open todo"
+      echo "  $SELF undo N                 marks the Nth completed todo as not done" ;;
   esac
 else
   echo $fg_bold[default]"  my todos: "$reset_color

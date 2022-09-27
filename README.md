@@ -7,12 +7,13 @@ wanting to learn coreutils.
 
 ## usage
 
-* `todo.zsh`                  prints current open and completed todos
-* `todo.zsh add some task`    adds 'some task' as open todo
-* `todo.zsh clean`            clears completed todos off the list
-* `todo.zsh done N`           marks the Nth todo as completed
-* `todo.zsh trash N`          deletes the Nth open todo
-* `todo.zsh undo N`           marks the Nth completed todo as not done
+* `todo.zsh`                        prints current open and completed todos
+* `todo.zsh add some task`          adds 'some task' as open todo
+* `todo.zsh clean`                  clears completed todos off the list
+* `todo.zsh done N`                 marks the Nth todo as completed
+* `todo zsh rename N new descr.`    renames Nth open task to 'new descr.
+* `todo.zsh trash N`                deletes the Nth open todo
+* `todo.zsh undo N`                 marks the Nth completed todo as not done
 
 You can mark a task as high priority by including `:high:` somewhere
 in the task name. Similarily you can mark a task as low priority by
