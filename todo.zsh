@@ -32,7 +32,7 @@ if [[ $# -ne 0 ]]; then
       echo "  $SELF trash N                deletes the Nth open todo"
       echo "  $SELF undo N                 marks the Nth completed todo as not done" ;;
   esac
-  # re-sort and clean both files
+  # clean and re-sort both files
   grep -v -E "(^#|^\s*$)" $FILE_TODO | sort -u -o $FILE_TODO -
   grep -v -E "(^#|^\s*$)" $FILE_DONE | sort -u -o $FILE_DONE -
 else
