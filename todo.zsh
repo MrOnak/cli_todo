@@ -38,13 +38,11 @@ if [[ $# -ne 0 ]]; then
 else
   echo $fg_bold[default]"  my todos: "$reset_color
   if [[ -n $TODOS ]]; then 
-    echo $TODOS | nl -s ") " -w2 | \
-      sed "s/^/$G[1]/;s/:high:/$G[3]/;s/:low:/$G[4]/"
+    echo $TODOS | nl -s ") " -w2 | sed "s/^/$G[1]/;s/:high:/$G[3]/;s/:low:/$G[4]/"
   fi
   if [[ -n $DONES ]]; then
     echo $fg[yellow]"  ────────────────────────────────────────────"$reset_color
-    echo $DONES | nl -s ") " -w2 | \
-      sed "s/^/$G[2]/;s/:high:/$G[3]/;s/:low:/$G[4]/"
+    echo $DONES | nl -s ") " -w2 | sed "s/^/$G[2]/;s/:high:/$G[3]/;s/:low:/$G[4]/"
   fi
 fi
 
