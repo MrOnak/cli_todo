@@ -15,26 +15,12 @@ if [[ $# -ne 0 ]]; then
   COMMAND=$1
   shift
   case $COMMAND in
-    add|a)
-      echo $* >> $FILE_TODO
-      grep -v -E "(^#|^\s*$)" $FILE_TODO | sort -u -o $FILE_TODO - ;;
-    clean|c)
-      echo -n "" > $FILE_DONE ;;
-    done|d)
-      echo $TODOS | awk 'NR=='$1' {print;exit}' >> $FILE_DONE
-      grep -v -E "(^#|^\s*$)" $FILE_DONE | sort -u -o $FILE_DONE -
-      sed -i $1'd' $FILE_TODO ;;
-    rename|r)
-      sed -i $1'd' $FILE_TODO
-      shift
-      echo $* >> $FILE_TODO
-      grep -v -E "(^#|^\s*$)" $FILE_TODO | sort -u -o $FILE_TODO - ;;
-    trash|t)
-      sed -i $1'd' $FILE_TODO ;;
-    undo|u) 
-      echo $DONES | awk 'NR=='$1' {print;exit}' >> $FILE_TODO
-      grep -v -E "(^#|^\s*$)" $FILE_TODO | sort -u -o $FILE_TODO -
-      sed -i $1'd' $FILE_DONE ;;
+    add|a)      echo $* >> $FILE_TODO ;;
+    clean|c)    echo -n "" > $FILE_DONE ;;
+    done|d)     echo $TODOS | awk 'NR=='$1' {print;exit}' >> $FILE_DONE; sed -i $1'd' $FILE_TODO ;;
+    rename|r)   sed -i $1'd' $FILE_TODO; shift; echo $* >> $FILE_TODO ;;
+    trash|t)    sed -i $1'd' $FILE_TODO ;;
+    undo|u)     echo $DONES | awk 'NR=='$1' {print;exit}' >> $FILE_TODO; sed -i $1'd' $FILE_DONE ;;
     *)
       SELF=`basename $0`
       echo "Usage: $SELF (add|clean|done|rename|trash|undo|)"
@@ -46,6 +32,9 @@ if [[ $# -ne 0 ]]; then
       echo "  $SELF trash N                deletes the Nth open todo"
       echo "  $SELF undo N                 marks the Nth completed todo as not done" ;;
   esac
+  # re-sort and clean both files
+  grep -v -E "(^#|^\s*$)" $FILE_TODO | sort -u -o $FILE_TODO -
+  grep -v -E "(^#|^\s*$)" $FILE_DONE | sort -u -o $FILE_DONE -
 else
   echo $fg_bold[default]"  my todos: "$reset_color
   if [[ -n $TODOS ]]; then 
