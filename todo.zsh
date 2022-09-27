@@ -36,7 +36,7 @@ if [[ $# -ne 0 ]]; then
   grep -v -E "(^#|^\s*$)" $FILE_TODO | sort -u -o $FILE_TODO -
   grep -v -E "(^#|^\s*$)" $FILE_DONE | sort -u -o $FILE_DONE -
 else
-  echo $fg_bold[default]"  my todos: "$reset_color
+  #echo $fg_bold[default]"  my todos"$reset_color
   if [[ -n $TODOS ]]; then 
     echo $TODOS | nl -s ") " -w2 | sed "s/^/$G[1]/;s/:high:/$G[3]/;s/:low:/$G[4]/"
   fi
