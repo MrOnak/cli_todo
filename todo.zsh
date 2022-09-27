@@ -16,13 +16,13 @@ if [[ $# -ne 0 ]]; then
   case $COMMAND in
     add|a)
       echo $* >> $FILE_TODO;
-      cat $FILE_TODO | grep -v -E "(^#|^\s*$)" | sort -u -o $FILE_TODO - ;;
+      grep -v -E "(^#|^\s*$)" $FILE_TODO | sort -u -o $FILE_TODO - ;;
     clean|c)
       echo $TODOS > $FILE_TODO
       echo -n "" > $FILE_DONE ;;
     done|d)
       echo $TODOS | awk 'NR=='$1' {print;exit}' >> $FILE_DONE; 
-      cat $FILE_DONE | grep -v -E "(^#|^\s*$)" | sort -u -o $FILE_DONE - ;;
+      grep -v -E "(^#|^\s*$)" $FILE_DONE | sort -u -o $FILE_DONE - ;;
     undo|u) 
       sed -i $1'd' $FILE_DONE ;;
     *)
