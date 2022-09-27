@@ -7,7 +7,7 @@ if [[ ! -d $FILE_DIR ]]; then echo "directory '$FILE_DIR' not found"; exit 1; fi
 touch $FILE_TODO $FILE_DONE
 TODOS=$(<$FILE_TODO)
 DONES=$(<$FILE_DONE)
-# prepare glyphs. if you want to use plain ASCII, I recommend o, x, !, _
+# prepare glyphs. if you want to use plain ASCII, I recommend o, x, ^, v
 GE=$reset_color
 G=($fg[red]"   "$GE $fg[green]"   "$GE $fg_bold[yellow]""$GE $fg[yellow]""$GE)
 # run commands
