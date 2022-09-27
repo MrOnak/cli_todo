@@ -7,11 +7,12 @@ wanting to learn coreutils.
 
 ## usage
 
-* `todo` lists currently open and completed tasks
-* `todo add some task` adds 'some task' to the list of open tasks
-* `todo done N` marks the Nth task as completed
-* `todo undo N` marks the Nth completed task as not done
-* `todo clean` purges completed tasks off the lists
+* `todo.zsh`                  prints current open and completed todos
+* `todo.zsh add some task`    adds 'some task' as open todo
+* `todo.zsh clean`            clears completed todos off the list
+* `todo.zsh done N`           marks the Nth todo as completed
+* `todo.zsh trash N`          deletes the Nth open todo
+* `todo.zsh undo N`           marks the Nth completed todo as not done
 
 You can mark a task as high priority by including `:high:` somewhere
 in the task name. Similarily you can mark a task as low priority by
@@ -33,6 +34,16 @@ creating a directory like `~/.todos` manually and changing the `FILE_DIR`
 variable to an absolute path. Files will be automatically created if they
 don't exist.
 
-You might also want to symlink the `todo` script to `~/.local/bin` or 
-another directory in your `PATH` for ease of access.
+You might also want to symlink the `todo.zsh` script to `~/.local/bin/todo`
+or another directory in your `PATH` for ease of access.
+
+## upgrading
+
+As always, it is good practice to make backups of the `todo.txt` and `done.txt`
+files before upgrading this application.
+
+I've changed the way the content of both tiles is interpreted after v1.0.0:
+If you upgrade from v1.0.0 or earlier, an upgrade works fine if you `todo.zsh clean`
+before the upgrade. Otherwise your done tasks appear in both lists, but another
+`todo.zsh done N` for those will fix it.
 
