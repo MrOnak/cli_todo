@@ -9,7 +9,7 @@ TODOS=$(<$FILE_TODO)
 DONES=$(<$FILE_DONE)
 # prepare glyphs. if you want to use plain ASCII, I recommend o, x, !, _
 GE=$reset_color
-G=($fg[red]"   "$GE $fg[green]"   "$GE $fg[yellow]""$GE $fg[blue]""$GE)
+G=($fg[red]"   "$GE $fg[green]"   "$GE $fg_bold[yellow]""$GE $fg[yellow]""$GE)
 # run commands
 if [[ $# -ne 0 ]]; then
   COMMAND=$1
