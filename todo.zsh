@@ -2,11 +2,10 @@
 autoload colors
 colors
 # ensure files exist, load lists
-FILE_DIR=~/.todos; FILE_TODO=$FILE_DIR"/todos.txt"; FILE_DONE=$FILE_DIR"/done.txt";
+FILE_DIR=~/.todos; FILE_TODO=$FILE_DIR"/todos.txt"; FILE_DONE=$FILE_DIR"/done.txt"
 if [[ ! -d $FILE_DIR ]]; then echo "directory '$FILE_DIR' not found"; exit 1; fi
 touch $FILE_TODO $FILE_DONE
-TODOS=$(<$FILE_TODO)
-DONES=$(<$FILE_DONE)
+TODOS=$(<$FILE_TODO); DONES=$(<$FILE_DONE)
 # prepare glyphs. if you want to use plain ASCII, I recommend o, x, ^, v
 GE=$reset_color
 G=($fg[red]"   "$GE $fg[green]"   "$GE $fg_bold[yellow]""$GE $fg[yellow]""$GE)
