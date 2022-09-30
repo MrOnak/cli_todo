@@ -8,18 +8,23 @@ touch $FILE_TODO $FILE_DONE
 TODOS=$(<$FILE_TODO); DONES=$(<$FILE_DONE)
 # prepare glyphs. if you want to use plain ASCII, I recommend o, x, ^, v
 GE=$reset_color
-G=($fg[red]"   "$GE $fg[green]"   "$GE $fg_bold[yellow]""$GE $fg[yellow]""$GE)
+G=($fg[red]"   "$GE $fg[green]"   "$GE $fg_bold[yellow]""$GE $fg[cyan]""$GE)
+# functions
+move_tasks() {
+  for i in $s; do echo $1 | awk 'NR=='$i' {print;exit}' >> $2; sed -i $i'd' $3; done
+}
 # run commands
 if [[ $# -ne 0 ]]; then
   COMMAND=$1
   shift
+  IFS=$'\n' s=($(sort -nr <<<"$*")); unset IFS; # sort potential task id list
   case $COMMAND in
     add|a)      echo $* >> $FILE_TODO ;;
     clean|c)    echo -n "" > $FILE_DONE ;;
-    done|d)     echo $TODOS | awk 'NR=='$1' {print;exit}' >> $FILE_DONE; sed -i $1'd' $FILE_TODO ;;
+    done|d)     move_tasks $TODOS $FILE_DONE $FILE_TODO ;;
     rename|r)   sed -i $1'd' $FILE_TODO; shift; echo $* >> $FILE_TODO ;;
-    trash|t)    sed -i $1'd' $FILE_TODO ;;
-    undo|u)     echo $DONES | awk 'NR=='$1' {print;exit}' >> $FILE_TODO; sed -i $1'd' $FILE_DONE ;;
+    trash|t)    for i in $s; do sed -i $i'd' $FILE_TODO; done ;;
+    undo|u)     move_tasks $DONES $FILE_TODO $FILE_DONE ;;
     *)
       SELF=`basename $0`
       echo "Usage: $SELF (add|clean|done|rename|trash|undo|)"
